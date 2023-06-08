@@ -2,21 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 
-const db = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "admin",
-  database: "express_react_aws_task",
-});
 
-db.connect((err) => {
-  if (err) {
-    console.error("Error connecting to MySQL:", err);
-    return;
-  }
-  console.log("Connected to MySQL database");
-});
 
 const app = express();
 const port = 5000;
@@ -27,16 +13,15 @@ app.get("/", (req, res) => {
   res.json({ status: 200, message: "Succeed" });
 });
 
-app.get("/todos", (req, res) => {
-  const sql = "SELECT * FROM todos";
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error("Error executing query:", err);
-      res.status(500).json({ error: "Error executing query" });
-      return;
-    }
-    res.json(results);
-  });
+app.get("/kamis", (req, res) => {
+  const data = {
+id:1,
+	nrp:"3121500006",
+	nama:"Mohamad Faizal Norhavid",
+	hari:"kamis",
+	tanggal: "6 Juni 2023"
+	};
+    res.json(data);
 });
 
 app.listen(port, () => {
